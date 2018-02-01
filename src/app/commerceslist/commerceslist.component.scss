@@ -1,0 +1,20 @@
+.list-inline {
+  width: 25%;
+//   list-style:none;
+}
+
+.list-inline li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+    float: left;
+}
+.control-header {
+    display:inline;
+    float:left
+}
+
+.menu-category {
+    display:inline;
+    float:left
+}

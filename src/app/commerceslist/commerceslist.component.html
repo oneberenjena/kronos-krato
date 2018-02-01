@@ -1,0 +1,65 @@
+<mat-card class="example-card">
+  <mat-list>
+    <mat-card-actions>
+      <mat-list-item>
+        <ul class="mat-list-item-content" style="list-style:none">
+          <li class="searchBox" style="margin-left:475px">
+            <mat-form-field class="example-form-field">
+              <input matInput type="text" (click)='searchForList = true' placeholder="Filtrar por nombre/descripción" [(ngModel)]="value" />
+              <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-menu #menu="matMenu" xPosition="after">
+              <button mat-menu-item *ngFor="let cat of category" (click)="searchForList = false; value = cat" >{{cat}}</button>
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="menu" color="primary">Categorías</button>
+          </li>
+          <div *ngIf="!searchForList">
+            <button mat-button color="primary" (click)="ascending = true">Rating Ascendente</button>
+            <button mat-button color="primary" (click)="ascending = false">Rating Descendente</button>
+          </div>
+        </ul>
+      </mat-list-item>
+    </mat-card-actions>
+  </mat-list>
+   <mat-card-content>
+    <mat-nav-list>
+      <div *ngIf="searchForList; then searchlist else searchcat"></div>
+      <ng-template #searchlist>
+        <mat-list-item [routerLink]="['/commerce', commerce.id]" *ngFor="let commerce of commerces | searchfilter: value : searchList ">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <a mat-line>{{commerce.name}}</a>
+          <p mat-line> {{commerce.sector}} </p>
+          <ul class="mat-list-item-content" style="list-style:none">
+            <li>
+              <mat-icon mat-list-icon color="primary">star</mat-icon>
+            </li>
+            <li>
+              <p mat-line> {{commerce.rating}} </p>
+            </li>
+          </ul>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-template>
+      <ng-template #searchcat>
+        <mat-list-item [routerLink]="['/commerce', commerce.id]" *ngFor="let commerce of commerces | sortbyrating: value: ascending">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <a mat-line>{{commerce.name}}</a>
+          <p mat-line> {{commerce.sector}} </p>
+          <ul class="mat-list-item-content" style="list-style:none">
+            <li>
+              <mat-icon mat-list-icon color="primary">star</mat-icon>
+            </li>
+            <li>
+              <p mat-line> {{commerce.rating}} </p>
+            </li>
+          </ul>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-template>
+    </mat-nav-list>
+  </mat-card-content>
+</mat-card>

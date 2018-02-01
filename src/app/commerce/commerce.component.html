@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <mat-card-title>{{commerce.name}}</mat-card-title>
+    <mat-card-subtitle>Sector: {{commerce.sector}}</mat-card-subtitle>
+    <mat-card-subtitle>Rating: {{commerce.rating}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    Descripcion:
+    <p>
+      {{commerce.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" [routerLink]="['/commerces']">VOLVER</button>
+  </mat-card-actions>
+</mat-card>
